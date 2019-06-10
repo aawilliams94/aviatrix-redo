@@ -78,7 +78,7 @@ var plane = Aviatrix(authorName: "Ashanti")
 
 print("Welcome to the Aviatrix Flight System by \(plane.author)")
 
-print("You're currently in _________")
+print("You're currently in \(plane.location)")
 
 var command = ""
 
