@@ -20,6 +20,9 @@ class Aviatrix {
         running = true
         return true
     }
+    //just found out we are starting in St. Louis
+    var location = "St. Louis"
+    var distanceTraveled = 0.0
     
     func refuel() {
         
@@ -29,8 +32,9 @@ class Aviatrix {
         
     }
     
-    func distanceTo(target : String) {
-    
+    func distanceTo(current: String, target : String) -> Int {
+        let data = AviatrixData()
+        return data.knownDistances[current]![target]!
     }
     
     func knownDestinations() -> [String] {
