@@ -11,13 +11,13 @@ import Foundation
 func gauges(myPlane : Aviatrix) {
     print("Reading the gauges...")
     print(" ")
-//    print("| Running:  | ✅")
-//    print("| Location:  | \(myPlane.location)")
-//    print("| Distance:  | \(myPlane.distanceTraveled) miles")
-//    print("| Fuel:      | \(myPlane.fuelLevel) gallons")
-//    print("| Max Fuel:  | \(myPlane.maxFuel) gallons")
-//    print("| MPG:       | \(myPlane.milesPerGallon)")
-//    print("| Fuel Bill: | \(myPlane.fuelCost)")
+    print("| Running:  | ✅")
+    print("| Location:  | \(myPlane.location)")
+    print("| Distance:  | \(myPlane.distanceTraveled) miles")
+    print("| Fuel:      | \(myPlane.fuelLevel) gallons")
+    print("| Max Fuel:  | \(myPlane.maxFuel) gallons")
+    print("| MPG:       | \(myPlane.milesPerGallon)")
+    print("| Fuel Bill: | \(myPlane.fuelCost)")
 }
 
 func fly(myPlane : Aviatrix) {
@@ -32,6 +32,7 @@ func fly(myPlane : Aviatrix) {
     
     let response = Int(readLine()!)
     var desiredLocation = ""
+
     
     if response! >= 0 && response! < 4 {
         desiredLocation = myPlane.knownDestinations()[response!]
@@ -41,7 +42,7 @@ func fly(myPlane : Aviatrix) {
         
         if fuelCheck(myPlane: myPlane, destination : desiredLocation) {
             myPlane.flyTo(destination: desiredLocation)
-            print("🛬 You've arrived in _________!")
+            print("🛬 You've arrived in \(plane.location)!")
             gauges(myPlane: myPlane)
         }
     }
@@ -53,24 +54,26 @@ func fly(myPlane : Aviatrix) {
 
 func refuel(myPlane : Aviatrix) {
     let refuelData = myPlane.refuel()
-    
+    let info = AviatrixData()
     print("Refueling...")
-    print("⛽ Here in _________, jet fuel costs _________")
-    print("⛽ You refueled _________ gallons totaling _________")
+    print("⛽ Here in \(plane.location), jet fuel costs $\(info.fuelPrices[plane.location]!)")
+    print("⛽ You refueled \(refuelData) gallons totaling $\(myPlane.fuelCost)")
 }
 
 func fuelCheck(myPlane : Aviatrix, destination : String) -> Bool {
-//    let distanceToTravel =  Double(myPlane.distanceTo(target : destination))
-//    if myPlane.fuelLevel < distanceToTravel {
-//        print(" ")
-//        print("🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥")
-//        print("Oh no! You've run out of fuel and crashed on the way to \(myPlane.location)!")
-//        print("🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥")
-//
-//        return false
-//    } else {
-//        return true
-//    }
+    let distanceToTravel =  Double(myPlane.distanceTo(current: myPlane.location, target: destination))
+    if myPlane.fuelLevel < distanceToTravel {
+        print(" ")
+        print("🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥")
+        print("Oh no! You've run out of fuel and crashed on the way to \(myPlane.location)!")
+        print("🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥")
+        
+            return false
+        
+    } else {
+        return true
+        
+    }
     return true
 }
 
@@ -108,4 +111,6 @@ while command != "q" {
 }
 
 print(" ")
-print("Thanks for flying with _________ airline!")
+print("Thanks for flying with \(plane.author)'s airline!")
+//I'm really proud of myself for getting it to say Ashanti's without typing my name even though I literally did that hours ago.
+//Final Edit, just realized I haven't been pushing this to github regularly
